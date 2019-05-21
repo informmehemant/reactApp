@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-import './App.css';
+import appStyles from './App.module.css';
 import Person from './Person/Person';
 
 // functional based using hook
@@ -56,15 +56,7 @@ class App extends Component {
   render() {
     // This is pure js part
     let persons = null;
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      border: '1px solid blue',
-      padding: '8px',
-      font: 'inherit',
-      cursor: 'pointer',
-      borderRadius: '4px'
-    }
+    let btnClass = '';
     if (this.state.showPersons) {
       persons = (
         <div>
@@ -81,21 +73,21 @@ class App extends Component {
 
         </div>
       );
-
+      btnClass = appStyles.Red
     }
     const classes = [];
     if (this.state.persons.length < 1) {
-      classes.push('red');
+      classes.push(appStyles.red);
     }
     if (this.state.persons.length < 2) {
-      classes.push('bold');
+      classes.push(appStyles.bold);
     }
 
     // jsx part
     return (
-      <div className="App" >
+      <div className={appStyles.App} >
         <h1 className={classes.join(' ')}>Future React Version is {Math.floor(Math.random() * 30)}</h1>
-        <button style={style} onClick={this.tooglePersonHandler}>Tooggle Person</button>
+        <button className={btnClass} onClick={this.tooglePersonHandler}>Tooggle Person</button>
         {persons}
       </div>
 
