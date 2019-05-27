@@ -22,7 +22,8 @@ class App extends Component {
         { id: uuid.v4(), name: 'Stepheni', age: 30 }
       ],
       otherState: 'some other state',
-      showPersons: false
+      showPersons: false,
+      showCockpit: true
     }
 
   }
@@ -123,13 +124,19 @@ class App extends Component {
     // jsx part
     return (
       <div>
-        <Cockpit
-          title={this.props.title}
-          persons={this.state.persons}
-          showPersons={this.state.showPersons}
-          clicked={this.tooglePersonHandler} />
+        <button onClick={() => this.setState({ showCockpit: false })}>
+          remove Cockpit
+          </button>
+
+        {
+          this.state.showCockpit ? <Cockpit
+            title={this.props.title}
+            persons={this.state.persons}
+            showPersons={this.state.showPersons}
+            clicked={this.tooglePersonHandler} /> : null
+        }
         {persons}
-      </div>
+      </div >
     );
   }
   // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'This is react app'))

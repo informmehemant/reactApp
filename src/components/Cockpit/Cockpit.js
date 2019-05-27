@@ -11,11 +11,26 @@ const Cockpit = (props) => {
     //     }, 1000)
     // }, [props.persons]);
     useEffect(() => {
-        console.log('[Cockpit.js] useEffect');
+        console.log('[Cockpit.js] useEffect1');
         setTimeout(() => {
-
+            console.log('Saved Data to Cloud..');
         }, 1000)
+        return () => {
+            console.log('[Cockpit.js] Cleanup work in useEffect...');
+        }
     }, [])
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect2');
+        return () => {
+            console.log('[Cockpit.js] 2nd Cleanup work in useEffect...');
+        }
+    });
+    useEffect(() => {
+        console.log('[Cockpit.js] useEffect3');
+        return () => {
+            console.log('[Cockpit.js] 3nd Cleanup work in useEffect...');
+        }
+    }, [props.persons]);
     const classes = [];
     let btnClass = '';
     if (props.showPersons) {
@@ -29,7 +44,8 @@ const Cockpit = (props) => {
     }
     return (
         <div className={cockpitStyle.Cockpit}>
-            <h1 className={classes.join(' ')}>{props.title}</h1>
+
+            <h1 className={classes.join(' ')} >{props.title}</h1>
             <button className={btnClass} onClick={props.clicked}>Tooggle Person</button>
         </div>
     );
