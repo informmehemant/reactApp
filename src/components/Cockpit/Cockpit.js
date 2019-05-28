@@ -16,39 +16,40 @@ const Cockpit = (props) => {
             console.log('Saved Data to Cloud..');
         }, 1000)
         return () => {
+            // clearTimeout(timer);
             console.log('[Cockpit.js] Cleanup work in useEffect...');
         }
     }, [])
-    useEffect(() => {
-        console.log('[Cockpit.js] useEffect2');
-        return () => {
-            console.log('[Cockpit.js] 2nd Cleanup work in useEffect...');
-        }
-    });
-    useEffect(() => {
-        console.log('[Cockpit.js] useEffect3');
-        return () => {
-            console.log('[Cockpit.js] 3nd Cleanup work in useEffect...');
-        }
-    }, [props.persons]);
+    // // This are controlled useEffects
+    // useEffect(() => {
+    //     console.log('[Cockpit.js] useEffect2');
+    //     return () => {
+    //         console.log('[Cockpit.js] 2nd Cleanup work in useEffect...');
+    //     }
+    // });
+    // useEffect(() => {
+    //     console.log('[Cockpit.js] useEffect3');
+    //     return () => {
+    //         console.log('[Cockpit.js] 3nd Cleanup work in useEffect...');
+    //     }
+    // }, [props.persons]);
     const classes = [];
     let btnClass = '';
     if (props.showPersons) {
         btnClass = cockpitStyle.Red
     }
-    if (props.persons.length < 1) {
+    if (props.personLength < 1) {
         classes.push(cockpitStyle.red);
     }
-    if (props.persons.length < 2) {
+    if (props.personLength < 2) {
         classes.push(cockpitStyle.bold);
     }
     return (
         <div className={cockpitStyle.Cockpit}>
-
             <h1 className={classes.join(' ')} >{props.title}</h1>
             <button className={btnClass} onClick={props.clicked}>Tooggle Person</button>
         </div>
     );
 }
 
-export default Cockpit;
+export default React.memo(Cockpit);

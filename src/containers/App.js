@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
-// import appStyles from './App.module.css';
+import appStyles from './App.module.css';
 
 import Persons from '../components/Persons/Persons';
 
 import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
+
+import WithClass from '../components/Hoc/WithClass';
 
 // functional based using hook
 class App extends Component {
@@ -54,7 +56,7 @@ class App extends Component {
   componentDidUpdate() {
     console.log('[App.js] ComponentDidUpdate ...');
   }
-  shouldComponentUpdate(prevProps, prevState) {
+  shouldComponentUpdate(nextProps, nextState) {
     console.log('[App.js] shouldComponentUpdate ...');
     return true;
   }
@@ -123,7 +125,7 @@ class App extends Component {
 
     // jsx part
     return (
-      <div>
+      <WithClass classes={appStyles.App}>
         <button onClick={() => this.setState({ showCockpit: false })}>
           remove Cockpit
           </button>
@@ -131,12 +133,12 @@ class App extends Component {
         {
           this.state.showCockpit ? <Cockpit
             title={this.props.title}
-            persons={this.state.persons}
+            personLength={this.state.persons.length}
             showPersons={this.state.showPersons}
             clicked={this.tooglePersonHandler} /> : null
         }
         {persons}
-      </div >
+      </WithClass >
     );
   }
   // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'This is react app'))
