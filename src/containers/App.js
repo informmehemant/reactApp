@@ -8,7 +8,8 @@ import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 // import ErrorBoundry from './ErrorBoundry/ErrorBoundry';
 
-import WithClass from '../components/Hoc/WithClass';
+import withClass from '../components/Hoc/WithClass';
+import Aux from '../components/Hoc/Hoc';
 
 // functional based using hook
 class App extends Component {
@@ -125,7 +126,8 @@ class App extends Component {
 
     // jsx part
     return (
-      <WithClass classes={appStyles.App}>
+      <Aux>
+        {/* <WithClass classes={appStyles.App}> */}
         <button onClick={() => this.setState({ showCockpit: false })}>
           remove Cockpit
           </button>
@@ -138,10 +140,11 @@ class App extends Component {
             clicked={this.tooglePersonHandler} /> : null
         }
         {persons}
-      </WithClass >
+        {/* </WithClass > */}
+      </Aux>
     );
   }
   // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'This is react app'))
 }
 
-export default App;
+export default withClass(App, appStyles.App);
