@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
 
+
 import appStyles from './App.module.css';
 
 import Persons from '../components/Persons/Persons';
@@ -26,7 +27,8 @@ class App extends Component {
       ],
       otherState: 'some other state',
       showPersons: false,
-      showCockpit: true
+      showCockpit: true,
+      changeCounter: 0
     }
 
   }
@@ -80,7 +82,13 @@ class App extends Component {
 
     persons[personIndex] = person;
 
-    this.setState({ persons: persons })
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        changeCounter: prevState.changeCounter + 1
+      }
+    })
+
   }
   tooglePersonHandler = () => {
     const doesShow = this.state.showPersons;
@@ -146,5 +154,6 @@ class App extends Component {
   }
   // return React.createElement('div', { className: 'App' }, React.createElement('h1', null, 'This is react app'))
 }
+
 
 export default withClass(App, appStyles.App);

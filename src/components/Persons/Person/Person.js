@@ -1,7 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import PropTypes from 'prop-types';
 
+import withClass from '../../Hoc/WithClass';
 import Aux from '../../Hoc/Hoc'
 import personClass from './Person.module.css';
+import { string } from 'postcss-selector-parser';
 
 class Person extends Component {
 
@@ -29,4 +32,10 @@ class Person extends Component {
 
 }
 
-export default Person;
+Person.propTypes = {
+    name: PropTypes.string,
+    age: PropTypes.number,
+    click: PropTypes.func,
+    changed: PropTypes.func
+};
+export default withClass(Person, personClass);
